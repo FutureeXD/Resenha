@@ -13,7 +13,7 @@ function useElection() {
   useEffect(() => { refresh(); if (!supabase) return; const channel = supabase.channel('election-public').on('postgres_changes',{ event:'*',schema:'public',table:'election_config' },refresh).on('postgres_changes',{ event:'*',schema:'public',table:'candidates' },refresh).subscribe(); return () => { supabase.removeChannel(channel); }; }, []);
   return { config, candidates, error, loading, refresh };
 }
-function Brand() { return <a className="brand" href="/"><span className="brand-icon"><Vote size={19}/></span><span>urna<span className="brand-light">digital</span><small>SIMULADOR ELEITORAL</small></span></a>; }
+function Brand() { return <a className="brand" href="/"><span className="brand-icon"><Vote size={19}/></span><span>Eleições Grêmio Estudantil 2026<small>EE Zacarias Antônio da Silva</small></span></a>; }
 function Header({config, admin=false}) { return <header className="topbar"><div className="top-inner"><Brand/><div className="header-right"><span className={'status-dot '+(config?.status || '')}/><span className="header-status">{config ? statusLabel[config.status] : 'Conectando'}</span><span className="header-divider"/><a className="admin-link" href={admin ? '/' : '/admin'}>{admin ? <ArrowLeft size={15}/> : <LockKeyhole size={15}/>} {admin ? 'Voltar à urna' : 'Acesso administrativo'}</a></div></div></header>; }
 function UrnaScreen({config, candidates, digits, blank, done, error}) {
   const candidate = candidates.find(c => c.number === digits), complete = digits.length === 2;
