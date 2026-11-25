@@ -55,6 +55,6 @@ begin
   delete from public.voter_attendance where id is not null;
   update public.student_codes set used=false where used=true;
 end $$;
-revoke all on function public.zerar_eleicao() from public;
+revoke all on function public.zerar_eleicao() from public, anon;
 grant execute on function public.zerar_eleicao() to authenticated;
 commit;
